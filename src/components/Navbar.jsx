@@ -4,6 +4,11 @@ import { navLinks } from "../constants";
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
+  const [active, setActive] = useState('home');
+
+  const handleOnClick = id => {
+    setActive(id);
+  }
 
   return (
     <nav className="flex py-6 justify-between items-center navbar">
@@ -13,11 +18,12 @@ const Navbar = () => {
         {navLinks.map((nav, index) => (
           <li
             key={nav.id}
+            onClick={() => handleOnClick(nav.id)}
             className={`font-poppins font-normal cursor-pointer text-[16px] p-3 hover:border-b-2 ${
               index === navLinks.length - 1 ? "mr-0" : "mr-1"
-            } text-white `}
+            } ${active === nav.id ? "border-b-2" : ""} text-white `}
           >
-            <a href={`#${nav.id}`}>{nav.title}</a>
+            <a href={`#${nav.id}`}  >{nav.title}</a>
           </li>
         ))}
       </ul>
